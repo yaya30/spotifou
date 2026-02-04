@@ -1,0 +1,41 @@
+# BMM Workflow Status - spotifou
+# This tracks progress through BMM methodology Analysis, Planning, and Solutioning phases.
+# Implementation phase is tracked separately in sprint-status.yaml
+
+# STATUS DEFINITIONS:
+# ==================
+# Initial Status (before completion):
+#   - required: Must be completed to progress
+#   - optional: Can be completed but not required
+#   - recommended: Strongly suggested but not required
+#   - conditional: Required only if certain conditions met (e.g., if_has_ui)
+#
+# Completion Status:
+#   - {file-path}: File created/found (e.g., "docs/product-brief.md")
+#   - skipped: Optional/conditional workflow that was skipped
+
+generated: "2026-01-17"
+project: "spotifou"
+project_type: "software"
+selected_track: "method"
+field_type: "greenfield"
+workflow_path: "method-greenfield.yaml"
+
+workflow_status:
+  # Phase 1: Analysis (Discovery) - User selected
+  brainstorm-project: recommended
+  research: recommended
+  product-brief: recommended
+
+  # Phase 2: Planning
+  prd: "_bmad-output/planning-artifacts/prd.md"  # Completed 2026-01-27
+  create-ux-design: "_bmad-output/planning-artifacts/ux-design-specification.md"  # Completed 2026-01-30
+
+  # Phase 3: Solutioning
+  create-architecture: "_bmad-output/planning-artifacts/architecture.md"  # Completed 2026-02-02
+  create-epics-and-stories: "_bmad-output/planning-artifacts/epics.md"  # Completed 2026-02-03
+  test-design: optional
+  implementation-readiness: "_bmad-output/planning-artifacts/implementation-readiness-report-2026-02-03.md"  # Completed 2026-02-03
+
+  # Phase 4: Implementation
+  sprint-planning: required

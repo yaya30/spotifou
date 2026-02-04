@@ -1,0 +1,109 @@
+# generated: 2026-02-03
+# project: spotifou
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-02-03
+project: spotifou
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+  # Epic 1: Foundation & Dev Environment
+  epic-1: in-progress
+  1-1-initialize-monorepo-structure: ready-for-dev
+  1-2-initialize-frontend-project: backlog
+  1-3-initialize-backend-project: backlog
+  1-4-configure-cors-and-api-base-path: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: User Authentication
+  epic-2: backlog
+  2-1-create-user-entity-and-repository: backlog
+  2-2-implement-google-oauth-backend-authentication: backlog
+  2-3-implement-frontend-google-oauth-login: backlog
+  2-4-implement-session-persistence-and-protected-routes: backlog
+  2-5-implement-logout: backlog
+  2-6-display-user-profile: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Music Catalog Browsing
+  epic-3: backlog
+  3-1-create-catalog-entities-and-seed-data: backlog
+  3-2-implement-artist-list-api-and-ui: backlog
+  3-3-implement-artist-detail-and-albums-api-ui: backlog
+  3-4-implement-album-detail-and-track-list-api-ui: backlog
+  3-5-implement-home-dashboard-with-catalog-browse: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Audio Playback
+  epic-4: backlog
+  4-1-create-player-store-and-audio-service: backlog
+  4-2-implement-persistent-player-bar-component: backlog
+  4-3-implement-play-and-pause-functionality: backlog
+  4-4-implement-progress-display-and-seeking: backlog
+  4-5-implement-now-playing-display: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Search & Discovery
+  epic-5: backlog
+  5-1-implement-search-api-endpoint: backlog
+  5-2-implement-search-ui-with-unified-results: backlog
+  5-3-implement-no-results-state: backlog
+  epic-5-retrospective: optional
+
+  # Epic 6: Playlist Management
+  epic-6: backlog
+  6-1-create-playlist-entity-and-api: backlog
+  6-2-create-and-view-playlists: backlog
+  6-3-view-playlist-details-and-tracks: backlog
+  6-4-add-track-to-playlist: backlog
+  6-5-remove-track-from-playlist: backlog
+  6-6-delete-and-rename-playlist: backlog
+  6-7-play-playlist-sequentially: backlog
+  epic-6-retrospective: optional
+
+  # Epic 7: User Library (Favorites)
+  epic-7: backlog
+  7-1-create-favorites-entity-and-api: backlog
+  7-2-add-and-remove-favorites: backlog
+  7-3-view-favorites-library: backlog
+  7-4-display-favorite-status-on-tracks: backlog
+  epic-7-retrospective: optional
+
+  # Epic 8: Error Handling & Polish
+  epic-8: backlog
+  8-1-implement-global-error-handling: backlog
+  8-2-implement-retry-functionality: backlog
+  8-3-implement-empty-states: backlog
+  8-4-handle-session-expiration: backlog
+  epic-8-retrospective: optional

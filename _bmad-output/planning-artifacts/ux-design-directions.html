@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>spotifou - Design Directions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * { font-family: 'Inter', system-ui, sans-serif; }
+
+        .nav-btn { transition: all 0.2s; }
+        .nav-btn:hover { transform: scale(1.02); }
+        .nav-btn.active { background: #3B82F6; color: white; }
+
+        .mockup { display: none; }
+        .mockup.active { display: block; }
+
+        .track-row:hover { background: #334155; }
+        .play-btn { opacity: 0; transition: opacity 0.2s; }
+        .track-row:hover .play-btn { opacity: 1; }
+        .track-row:hover .track-num { opacity: 0; }
+
+        .album-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .album-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+
+        .sidebar-item { transition: background 0.15s; }
+        .sidebar-item:hover { background: #334155; }
+        .sidebar-item.active { background: #334155; color: #3B82F6; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-50 min-h-screen">
+
+    <!-- Navigation -->
+    <div class="fixed top-0 left-0 right-0 bg-slate-900/95 backdrop-blur border-b border-slate-800 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <h1 class="text-xl font-bold text-blue-500">spotifou Design Directions</h1>
+            <div class="flex gap-2">
+                <button onclick="showMockup(1)" class="nav-btn active px-4 py-2 rounded-lg bg-slate-800 text-sm font-medium" id="btn-1">1. Classic Layout</button>
+                <button onclick="showMockup(2)" class="nav-btn px-4 py-2 rounded-lg bg-slate-800 text-sm font-medium" id="btn-2">2. Compact Dense</button>
+                <button onclick="showMockup(3)" class="nav-btn px-4 py-2 rounded-lg bg-slate-800 text-sm font-medium" id="btn-3">3. Card Focus</button>
+                <button onclick="showMockup(4)" class="nav-btn px-4 py-2 rounded-lg bg-slate-800 text-sm font-medium" id="btn-4">4. Minimal Clean</button>
+                <button onclick="showMockup(5)" class="nav-btn px-4 py-2 rounded-lg bg-slate-800 text-sm font-medium" id="btn-5">5. Full Player</button>
+                <button onclick="showMockup(6)" class="nav-btn px-4 py-2 rounded-lg bg-slate-800 text-sm font-medium" id="btn-6">6. Split View</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-20">
+
+        <!-- MOCKUP 1: Classic Spotify-style Layout -->
+        <div id="mockup-1" class="mockup active">
+            <div class="flex h-[calc(100vh-80px-72px)]">
+                <!-- Sidebar -->
+                <aside class="w-60 bg-slate-900 border-r border-slate-800 flex flex-col">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                            </div>
+                            <span class="font-bold text-xl">spotifou</span>
+                        </div>
+                        <nav class="space-y-1">
+                            <a href="#" class="sidebar-item active flex items-center gap-3 px-4 py-3 rounded-lg">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                Home
+                            </a>
+                            <a href="#" class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                Search
+                            </a>
+                            <a href="#" class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                                Library
+                            </a>
+                        </nav>
+                    </div>
+                    <div class="flex-1 px-6 overflow-auto">
+                        <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Playlists</h3>
+                        <div class="space-y-1">
+                            <a href="#" class="sidebar-item block px-4 py-2 rounded-lg text-slate-400 text-sm">Chill Vibes</a>
+                            <a href="#" class="sidebar-item block px-4 py-2 rounded-lg text-slate-400 text-sm">Workout Mix</a>
+                            <a href="#" class="sidebar-item block px-4 py-2 rounded-lg text-slate-400 text-sm">Focus Flow</a>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="flex-1 overflow-auto bg-gradient-to-b from-slate-800 to-slate-900">
+                    <div class="p-8">
+                        <h1 class="text-3xl font-bold mb-6">Good evening</h1>
+
+                        <!-- Quick Access Grid -->
+                        <div class="grid grid-cols-3 gap-4 mb-8">
+                            <div class="bg-slate-800/50 rounded-lg flex items-center gap-4 hover:bg-slate-700/50 cursor-pointer transition">
+                                <img src="https://picsum.photos/seed/album1/80/80" class="w-20 h-20 rounded-l-lg object-cover">
+                                <span class="font-semibold">Chill Vibes</span>
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg flex items-center gap-4 hover:bg-slate-700/50 cursor-pointer transition">
+                                <img src="https://picsum.photos/seed/album2/80/80" class="w-20 h-20 rounded-l-lg object-cover">
+                                <span class="font-semibold">Liked Songs</span>
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg flex items-center gap-4 hover:bg-slate-700/50 cursor-pointer transition">
+                                <img src="https://picsum.photos/seed/album3/80/80" class="w-20 h-20 rounded-l-lg object-cover">
+                                <span class="font-semibold">Discover Weekly</span>
+                            </div>
+                        </div>
+
+                        <!-- Album Section -->
+                        <h2 class="text-2xl font-bold mb-4">Recently Played</h2>
+                        <div class="grid grid-cols-5 gap-6">
+                            <div class="album-card bg-slate-800/30 p-4 rounded-xl cursor-pointer">
+                                <div class="relative mb-4">
+                                    <img src="https://picsum.photos/seed/a1/200/200" class="w-full aspect-square object-cover rounded-lg shadow-lg">
+                                    <button class="absolute bottom-2 right-2 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg opacity-0 hover:opacity-100 transition hover:scale-105">
+                                        <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                </div>
+                                <h3 class="font-semibold truncate">Midnight Dreams</h3>
+                                <p class="text-sm text-slate-400 truncate">Aurora Beats</p>
+                            </div>
+                            <div class="album-card bg-slate-800/30 p-4 rounded-xl cursor-pointer">
+                                <div class="relative mb-4">
+                                    <img src="https://picsum.photos/seed/a2/200/200" class="w-full aspect-square object-cover rounded-lg shadow-lg">
+                                    <button class="absolute bottom-2 right-2 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg opacity-0 hover:opacity-100 transition hover:scale-105">
+                                        <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                </div>
+                                <h3 class="font-semibold truncate">Electric Soul</h3>
+                                <p class="text-sm text-slate-400 truncate">Nova Collective</p>
+                            </div>
+                            <div class="album-card bg-slate-800/30 p-4 rounded-xl cursor-pointer">
+                                <div class="relative mb-4">
+                                    <img src="https://picsum.photos/seed/a3/200/200" class="w-full aspect-square object-cover rounded-lg shadow-lg">
+                                    <button class="absolute bottom-2 right-2 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg opacity-0 hover:opacity-100 transition hover:scale-105">
+                                        <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                </div>
+                                <h3 class="font-semibold truncate">Urban Echoes</h3>
+                                <p class="text-sm text-slate-400 truncate">Metro Sound</p>
+                            </div>
+                            <div class="album-card bg-slate-800/30 p-4 rounded-xl cursor-pointer">
+                                <div class="relative mb-4">
+                                    <img src="https://picsum.photos/seed/a4/200/200" class="w-full aspect-square object-cover rounded-lg shadow-lg">
+                                    <button class="absolute bottom-2 right-2 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg opacity-0 hover:opacity-100 transition hover:scale-105">
+                                        <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                </div>
+                                <h3 class="font-semibold truncate">Sunset Waves</h3>
+                                <p class="text-sm text-slate-400 truncate">Coastal Rhythm</p>
+                            </div>
+                            <div class="album-card bg-slate-800/30 p-4 rounded-xl cursor-pointer">
+                                <div class="relative mb-4">
+                                    <img src="https://picsum.photos/seed/a5/200/200" class="w-full aspect-square object-cover rounded-lg shadow-lg">
+                                    <button class="absolute bottom-2 right-2 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg opacity-0 hover:opacity-100 transition hover:scale-105">
+                                        <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                </div>
+                                <h3 class="font-semibold truncate">Deep Focus</h3>
+                                <p class="text-sm text-slate-400 truncate">Ambient Works</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Player Bar -->
+            <div class="fixed bottom-0 left-0 right-0 h-[72px] bg-slate-900 border-t border-slate-800 flex items-center px-4">
+                <div class="flex items-center gap-4 w-[240px]">
+                    <img src="https://picsum.photos/seed/now/56/56" class="w-14 h-14 rounded-lg shadow">
+                    <div class="min-w-0">
+                        <p class="font-medium truncate">Midnight Dreams</p>
+                        <p class="text-sm text-slate-400 truncate">Aurora Beats</p>
+                    </div>
+                    <button class="text-slate-400 hover:text-blue-500 transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </button>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2 max-w-xl mx-auto">
+                    <div class="flex items-center gap-6">
+                        <button class="text-slate-400 hover:text-white transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                        </button>
+                        <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:scale-105 transition">
+                            <svg class="w-5 h-5 text-slate-900 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <button class="text-slate-400 hover:text-white transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                        </button>
+                    </div>
+                    <div class="w-full flex items-center gap-3">
+                        <span class="text-xs text-slate-400 w-10 text-right">1:23</span>
+                        <div class="flex-1 h-1 bg-slate-700 rounded-full overflow-hidden">
+                            <div class="w-1/3 h-full bg-blue-500 rounded-full"></div>
+                        </div>
+                        <span class="text-xs text-slate-400 w-10">3:45</span>
+                    </div>
+                </div>
+                <div class="w-[240px] flex items-center justify-end gap-3">
+                    <button class="text-slate-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                    <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    <div class="w-24 h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div class="w-2/3 h-full bg-slate-400 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fixed bottom-20 right-6 bg-slate-800 p-4 rounded-xl shadow-xl max-w-xs">
+                <h3 class="font-semibold text-blue-400 mb-2">Direction 1: Classic Layout</h3>
+                <ul class="text-sm text-slate-300 space-y-1">
+                    <li>• Standard Spotify-style layout</li>
+                    <li>• Sidebar + main content + bottom player</li>
+                    <li>• Album grid with hover play buttons</li>
+                    <li>• Familiar, proven pattern</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MOCKUP 2: Compact Dense Layout -->
+        <div id="mockup-2" class="mockup">
+            <div class="flex h-[calc(100vh-80px-56px)]">
+                <!-- Narrow Sidebar -->
+                <aside class="w-16 bg-slate-900 border-r border-slate-800 flex flex-col items-center py-4">
+                    <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    </div>
+                    <nav class="space-y-2">
+                        <button class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-blue-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                        </button>
+                        <button class="w-10 h-10 rounded-lg flex items-center justify-center text-slate-400 hover:bg-slate-800 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </button>
+                        <button class="w-10 h-10 rounded-lg flex items-center justify-center text-slate-400 hover:bg-slate-800 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- Main Content - Dense Track List -->
+                <main class="flex-1 overflow-auto bg-slate-900">
+                    <div class="p-4">
+                        <!-- Search Bar -->
+                        <div class="relative mb-4">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            <input type="text" placeholder="Search tracks, artists, albums..." class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-blue-500">
+                        </div>
+
+                        <!-- Quick Filters -->
+                        <div class="flex gap-2 mb-4">
+                            <button class="px-3 py-1.5 bg-blue-500 rounded-full text-xs font-medium">All</button>
+                            <button class="px-3 py-1.5 bg-slate-800 rounded-full text-xs font-medium text-slate-400 hover:bg-slate-700">Artists</button>
+                            <button class="px-3 py-1.5 bg-slate-800 rounded-full text-xs font-medium text-slate-400 hover:bg-slate-700">Albums</button>
+                            <button class="px-3 py-1.5 bg-slate-800 rounded-full text-xs font-medium text-slate-400 hover:bg-slate-700">Playlists</button>
+                        </div>
+
+                        <!-- Dense Track List -->
+                        <div class="space-y-0.5">
+                            <div class="track-row flex items-center gap-3 px-3 py-2 rounded cursor-pointer group">
+                                <div class="relative w-6 text-center">
+                                    <span class="track-num text-slate-500 text-sm">1</span>
+                                    <svg class="play-btn absolute inset-0 w-4 h-4 m-auto text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                                <img src="https://picsum.photos/seed/t1/40/40" class="w-10 h-10 rounded">
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate">Neon Nights</p>
+                                    <p class="text-xs text-slate-400 truncate">Synthwave Dreams</p>
+                                </div>
+                                <span class="text-xs text-slate-500">3:24</span>
+                                <button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-blue-500">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </button>
+                            </div>
+                            <div class="track-row flex items-center gap-3 px-3 py-2 rounded cursor-pointer group bg-slate-800/50">
+                                <div class="relative w-6 text-center">
+                                    <svg class="w-4 h-4 m-auto text-blue-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                                </div>
+                                <img src="https://picsum.photos/seed/t2/40/40" class="w-10 h-10 rounded">
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate text-blue-400">Electric Dreams</p>
+                                    <p class="text-xs text-slate-400 truncate">Retro Future</p>
+                                </div>
+                                <span class="text-xs text-slate-500">4:12</span>
+                                <button class="text-blue-500">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </button>
+                            </div>
+                            <div class="track-row flex items-center gap-3 px-3 py-2 rounded cursor-pointer group">
+                                <div class="relative w-6 text-center">
+                                    <span class="track-num text-slate-500 text-sm">3</span>
+                                    <svg class="play-btn absolute inset-0 w-4 h-4 m-auto text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                                <img src="https://picsum.photos/seed/t3/40/40" class="w-10 h-10 rounded">
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate">Cosmic Journey</p>
+                                    <p class="text-xs text-slate-400 truncate">Space Ambient</p>
+                                </div>
+                                <span class="text-xs text-slate-500">5:01</span>
+                                <button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-blue-500">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </button>
+                            </div>
+                            <div class="track-row flex items-center gap-3 px-3 py-2 rounded cursor-pointer group">
+                                <div class="relative w-6 text-center">
+                                    <span class="track-num text-slate-500 text-sm">4</span>
+                                    <svg class="play-btn absolute inset-0 w-4 h-4 m-auto text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                                <img src="https://picsum.photos/seed/t4/40/40" class="w-10 h-10 rounded">
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate">Digital Sunrise</p>
+                                    <p class="text-xs text-slate-400 truncate">Chillwave FM</p>
+                                </div>
+                                <span class="text-xs text-slate-500">3:45</span>
+                                <button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-blue-500">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </button>
+                            </div>
+                            <div class="track-row flex items-center gap-3 px-3 py-2 rounded cursor-pointer group">
+                                <div class="relative w-6 text-center">
+                                    <span class="track-num text-slate-500 text-sm">5</span>
+                                    <svg class="play-btn absolute inset-0 w-4 h-4 m-auto text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                                <img src="https://picsum.photos/seed/t5/40/40" class="w-10 h-10 rounded">
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate">Vapor Trails</p>
+                                    <p class="text-xs text-slate-400 truncate">Future Funk</p>
+                                </div>
+                                <span class="text-xs text-slate-500">2:58</span>
+                                <button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-blue-500">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Compact Player -->
+            <div class="fixed bottom-0 left-0 right-0 h-14 bg-slate-900 border-t border-slate-800 flex items-center px-4">
+                <div class="flex items-center gap-3 w-1/4">
+                    <img src="https://picsum.photos/seed/t2/40/40" class="w-10 h-10 rounded">
+                    <div class="min-w-0">
+                        <p class="font-medium text-sm truncate">Electric Dreams</p>
+                        <p class="text-xs text-slate-400 truncate">Retro Future</p>
+                    </div>
+                </div>
+                <div class="flex-1 flex items-center justify-center gap-4">
+                    <button class="text-slate-400 hover:text-white"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+                    <button class="w-8 h-8 bg-white rounded-full flex items-center justify-center hover:scale-105 transition">
+                        <svg class="w-4 h-4 text-slate-900" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </button>
+                    <button class="text-slate-400 hover:text-white"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+                </div>
+                <div class="w-1/4 flex items-center gap-2">
+                    <div class="flex-1 h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div class="w-1/2 h-full bg-blue-500"></div>
+                    </div>
+                    <span class="text-xs text-slate-400">2:06/4:12</span>
+                </div>
+            </div>
+
+            <div class="fixed bottom-20 right-6 bg-slate-800 p-4 rounded-xl shadow-xl max-w-xs">
+                <h3 class="font-semibold text-blue-400 mb-2">Direction 2: Compact Dense</h3>
+                <ul class="text-sm text-slate-300 space-y-1">
+                    <li>• Icon-only sidebar (more content space)</li>
+                    <li>• Dense track list with small artwork</li>
+                    <li>• Compact player bar (56px)</li>
+                    <li>• Power-user efficiency focused</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MOCKUP 3: Card Focus Layout -->
+        <div id="mockup-3" class="mockup">
+            <div class="h-[calc(100vh-80px-72px)] overflow-auto bg-slate-900">
+                <!-- Top Nav -->
+                <header class="sticky top-0 bg-slate-900/95 backdrop-blur border-b border-slate-800 px-6 py-4 flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        </div>
+                        <nav class="flex gap-1">
+                            <button class="px-4 py-2 bg-blue-500 rounded-lg text-sm font-medium">Home</button>
+                            <button class="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-800">Browse</button>
+                            <button class="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-800">Library</button>
+                        </nav>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            <input type="text" placeholder="Search..." class="w-64 bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm">
+                        </div>
+                        <div class="w-9 h-9 bg-slate-700 rounded-full"></div>
+                    </div>
+                </header>
+
+                <main class="p-8 max-w-7xl mx-auto">
+                    <!-- Featured Card -->
+                    <div class="relative rounded-2xl overflow-hidden mb-8 h-72">
+                        <img src="https://picsum.photos/seed/featured/1200/400" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8">
+                            <p class="text-sm font-medium text-blue-400 mb-2">Featured Playlist</p>
+                            <h2 class="text-4xl font-bold mb-2">Late Night Vibes</h2>
+                            <p class="text-slate-300 mb-4">The perfect soundtrack for midnight sessions</p>
+                            <button class="px-6 py-3 bg-blue-500 rounded-full font-medium hover:bg-blue-600 transition flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Play Now
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card Grid -->
+                    <h2 class="text-2xl font-bold mb-6">Your Playlists</h2>
+                    <div class="grid grid-cols-4 gap-6 mb-8">
+                        <div class="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700/80 transition cursor-pointer group">
+                            <div class="relative mb-4">
+                                <img src="https://picsum.photos/seed/p1/300/300" class="w-full aspect-square rounded-xl object-cover">
+                                <button class="absolute bottom-3 right-3 w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 transition transform translate-y-2 group-hover:translate-y-0">
+                                    <svg class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-bold text-lg mb-1">Chill Vibes</h3>
+                            <p class="text-slate-400 text-sm">24 tracks • 1h 32m</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700/80 transition cursor-pointer group">
+                            <div class="relative mb-4">
+                                <img src="https://picsum.photos/seed/p2/300/300" class="w-full aspect-square rounded-xl object-cover">
+                                <button class="absolute bottom-3 right-3 w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 transition transform translate-y-2 group-hover:translate-y-0">
+                                    <svg class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-bold text-lg mb-1">Workout Mix</h3>
+                            <p class="text-slate-400 text-sm">45 tracks • 2h 15m</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700/80 transition cursor-pointer group">
+                            <div class="relative mb-4">
+                                <img src="https://picsum.photos/seed/p3/300/300" class="w-full aspect-square rounded-xl object-cover">
+                                <button class="absolute bottom-3 right-3 w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 transition transform translate-y-2 group-hover:translate-y-0">
+                                    <svg class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-bold text-lg mb-1">Focus Flow</h3>
+                            <p class="text-slate-400 text-sm">18 tracks • 58m</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700/80 transition cursor-pointer group border-2 border-dashed border-slate-600 flex flex-col items-center justify-center min-h-[280px]">
+                            <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-7 h-7 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                            </div>
+                            <p class="font-medium text-slate-400">Create Playlist</p>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Player -->
+            <div class="fixed bottom-0 left-0 right-0 h-[72px] bg-slate-800 flex items-center px-6">
+                <div class="flex items-center gap-4 w-1/4">
+                    <img src="https://picsum.photos/seed/now3/56/56" class="w-14 h-14 rounded-lg">
+                    <div>
+                        <p class="font-medium">Midnight Dreams</p>
+                        <p class="text-sm text-slate-400">Aurora Beats</p>
+                    </div>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2">
+                    <div class="flex items-center gap-6">
+                        <button class="text-slate-400 hover:text-white"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+                        <button class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center hover:scale-105 transition">
+                            <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <button class="text-slate-400 hover:text-white"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+                    </div>
+                    <div class="w-full max-w-md flex items-center gap-3">
+                        <span class="text-xs text-slate-400">1:23</span>
+                        <div class="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                            <div class="w-1/3 h-full bg-blue-500 rounded-full"></div>
+                        </div>
+                        <span class="text-xs text-slate-400">3:45</span>
+                    </div>
+                </div>
+                <div class="w-1/4"></div>
+            </div>
+
+            <div class="fixed bottom-20 right-6 bg-slate-800 p-4 rounded-xl shadow-xl max-w-xs">
+                <h3 class="font-semibold text-blue-400 mb-2">Direction 3: Card Focus</h3>
+                <ul class="text-sm text-slate-300 space-y-1">
+                    <li>• Top navigation bar (no sidebar)</li>
+                    <li>• Large featured hero section</li>
+                    <li>• Big card grid layout</li>
+                    <li>• Modern, spacious feel</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MOCKUP 4: Minimal Clean -->
+        <div id="mockup-4" class="mockup">
+            <div class="h-[calc(100vh-80px-72px)] bg-slate-900 flex">
+                <!-- Minimal Sidebar -->
+                <aside class="w-56 border-r border-slate-800 p-6">
+                    <div class="flex items-center gap-2 mb-10">
+                        <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        <span class="font-semibold text-lg">spotifou</span>
+                    </div>
+                    <nav class="space-y-1">
+                        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-slate-800 text-blue-400 font-medium">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            Home
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            Search
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                            Favorites
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                            Playlists
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="flex-1 overflow-auto">
+                    <div class="max-w-4xl mx-auto p-10">
+                        <h1 class="text-4xl font-bold mb-2">Good evening</h1>
+                        <p class="text-slate-400 mb-10">Pick up where you left off</p>
+
+                        <!-- Simple List -->
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-5 p-4 rounded-xl hover:bg-slate-800/50 transition cursor-pointer group">
+                                <img src="https://picsum.photos/seed/m1/80/80" class="w-20 h-20 rounded-lg shadow-lg">
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-semibold mb-1">Midnight Dreams</h3>
+                                    <p class="text-slate-400">Aurora Beats • Album • 2024</p>
+                                </div>
+                                <button class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg">
+                                    <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-5 p-4 rounded-xl hover:bg-slate-800/50 transition cursor-pointer group">
+                                <img src="https://picsum.photos/seed/m2/80/80" class="w-20 h-20 rounded-lg shadow-lg">
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-semibold mb-1">Electric Soul</h3>
+                                    <p class="text-slate-400">Nova Collective • Playlist • 32 tracks</p>
+                                </div>
+                                <button class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg">
+                                    <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-5 p-4 rounded-xl hover:bg-slate-800/50 transition cursor-pointer group">
+                                <img src="https://picsum.photos/seed/m3/80/80" class="w-20 h-20 rounded-lg shadow-lg">
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-semibold mb-1">Urban Echoes</h3>
+                                    <p class="text-slate-400">Metro Sound • Artist</p>
+                                </div>
+                                <button class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg">
+                                    <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Elegant Player -->
+            <div class="fixed bottom-0 left-0 right-0 h-[72px] bg-slate-900/95 backdrop-blur border-t border-slate-800 flex items-center px-6">
+                <div class="flex items-center gap-5 w-1/3">
+                    <img src="https://picsum.photos/seed/m1/56/56" class="w-14 h-14 rounded-lg shadow">
+                    <div>
+                        <p class="font-medium">Midnight Dreams</p>
+                        <p class="text-sm text-slate-400">Aurora Beats</p>
+                    </div>
+                    <button class="text-slate-400 hover:text-blue-500 ml-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    </button>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2">
+                    <div class="flex items-center gap-8">
+                        <button class="text-slate-400 hover:text-white transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                        </button>
+                        <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:scale-105 transition">
+                            <svg class="w-5 h-5 text-slate-900 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <button class="text-slate-400 hover:text-white transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                        </button>
+                    </div>
+                    <div class="w-full max-w-lg flex items-center gap-3">
+                        <span class="text-xs text-slate-500 w-10 text-right">1:23</span>
+                        <div class="flex-1 h-1 bg-slate-700 rounded-full overflow-hidden group cursor-pointer">
+                            <div class="w-1/3 h-full bg-slate-400 group-hover:bg-blue-500 rounded-full transition"></div>
+                        </div>
+                        <span class="text-xs text-slate-500 w-10">3:45</span>
+                    </div>
+                </div>
+                <div class="w-1/3 flex items-center justify-end gap-3">
+                    <svg class="w-5 h-5 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                    <div class="w-20 h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div class="w-2/3 h-full bg-slate-500 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fixed bottom-20 right-6 bg-slate-800 p-4 rounded-xl shadow-xl max-w-xs">
+                <h3 class="font-semibold text-blue-400 mb-2">Direction 4: Minimal Clean</h3>
+                <ul class="text-sm text-slate-300 space-y-1">
+                    <li>• Maximum white space</li>
+                    <li>• Thin line icons</li>
+                    <li>• Large, readable content</li>
+                    <li>• Linear/Apple Music inspired</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MOCKUP 5: Full Player Focus -->
+        <div id="mockup-5" class="mockup">
+            <div class="h-[calc(100vh-80px)] bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex">
+                <!-- Side Panel -->
+                <aside class="w-80 bg-slate-900/50 backdrop-blur border-r border-slate-800/50 flex flex-col">
+                    <div class="p-6 border-b border-slate-800/50">
+                        <div class="flex items-center gap-2 mb-6">
+                            <svg class="w-7 h-7 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                            <span class="font-semibold">spotifou</span>
+                        </div>
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            <input type="text" placeholder="Search..." class="w-full bg-slate-800/50 border border-slate-700/50 rounded-lg pl-10 pr-4 py-2 text-sm">
+                        </div>
+                    </div>
+                    <div class="flex-1 overflow-auto p-4">
+                        <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-2 mb-3">Queue</h3>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-3 p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                                <img src="https://picsum.photos/seed/q1/40/40" class="w-10 h-10 rounded">
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate text-blue-400">Now Playing</p>
+                                    <p class="text-xs text-slate-400 truncate">Aurora Beats</p>
+                                </div>
+                                <svg class="w-4 h-4 text-blue-400 animate-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                                <img src="https://picsum.photos/seed/q2/40/40" class="w-10 h-10 rounded">
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate">Electric Dreams</p>
+                                    <p class="text-xs text-slate-400 truncate">Retro Future</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                                <img src="https://picsum.photos/seed/q3/40/40" class="w-10 h-10 rounded">
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate">Cosmic Journey</p>
+                                    <p class="text-xs text-slate-400 truncate">Space Ambient</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Full Player View -->
+                <main class="flex-1 flex flex-col items-center justify-center p-12">
+                    <img src="https://picsum.photos/seed/fp/400/400" class="w-80 h-80 rounded-2xl shadow-2xl mb-10">
+                    <h1 class="text-3xl font-bold mb-2">Midnight Dreams</h1>
+                    <p class="text-xl text-slate-400 mb-8">Aurora Beats</p>
+
+                    <!-- Progress -->
+                    <div class="w-full max-w-md mb-6">
+                        <div class="h-1.5 bg-slate-700 rounded-full overflow-hidden cursor-pointer group">
+                            <div class="w-1/3 h-full bg-blue-500 rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between mt-2">
+                            <span class="text-sm text-slate-400">1:23</span>
+                            <span class="text-sm text-slate-400">3:45</span>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex items-center gap-8">
+                        <button class="text-slate-400 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4a8 8 0 00-8 8 8 8 0 008 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18a6 6 0 01-6-6 6 6 0 016-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                        </button>
+                        <button class="text-slate-300 hover:text-white transition">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                        </button>
+                        <button class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center hover:scale-105 hover:bg-blue-400 transition shadow-lg shadow-blue-500/30">
+                            <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <button class="text-slate-300 hover:text-white transition">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                        </button>
+                        <button class="text-slate-400 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                        </button>
+                    </div>
+
+                    <!-- Extra Actions -->
+                    <div class="flex items-center gap-6 mt-8">
+                        <button class="text-slate-400 hover:text-blue-500 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </button>
+                        <button class="text-slate-400 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        </button>
+                        <button class="text-slate-400 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                        </button>
+                    </div>
+                </main>
+            </div>
+
+            <div class="fixed bottom-6 right-6 bg-slate-800 p-4 rounded-xl shadow-xl max-w-xs">
+                <h3 class="font-semibold text-blue-400 mb-2">Direction 5: Full Player</h3>
+                <ul class="text-sm text-slate-300 space-y-1">
+                    <li>• Player as main view (no bottom bar)</li>
+                    <li>• Large album art focus</li>
+                    <li>• Queue sidebar</li>
+                    <li>• Immersive music experience</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MOCKUP 6: Split View -->
+        <div id="mockup-6" class="mockup">
+            <div class="flex h-[calc(100vh-80px-72px)]">
+                <!-- Left: List View -->
+                <div class="w-1/2 border-r border-slate-800 bg-slate-900 overflow-auto">
+                    <div class="sticky top-0 bg-slate-900/95 backdrop-blur border-b border-slate-800 p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                                <span class="font-bold text-lg">spotifou</span>
+                            </div>
+                            <nav class="flex gap-1">
+                                <button class="px-3 py-1.5 bg-blue-500 rounded-lg text-sm font-medium">Home</button>
+                                <button class="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-800">Search</button>
+                                <button class="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-800">Library</button>
+                            </nav>
+                        </div>
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            <input type="text" placeholder="Search..." class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm">
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-1">
+                        <div class="flex items-center gap-3 p-3 rounded-lg bg-blue-500/10 border border-blue-500/30 cursor-pointer">
+                            <img src="https://picsum.photos/seed/s1/48/48" class="w-12 h-12 rounded">
+                            <div class="flex-1 min-w-0">
+                                <p class="font-medium truncate text-blue-400">Midnight Dreams</p>
+                                <p class="text-sm text-slate-400 truncate">Aurora Beats • Album</p>
+                            </div>
+                            <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 cursor-pointer">
+                            <img src="https://picsum.photos/seed/s2/48/48" class="w-12 h-12 rounded">
+                            <div class="flex-1 min-w-0">
+                                <p class="font-medium truncate">Electric Soul</p>
+                                <p class="text-sm text-slate-400 truncate">Nova Collective • Album</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 cursor-pointer">
+                            <img src="https://picsum.photos/seed/s3/48/48" class="w-12 h-12 rounded">
+                            <div class="flex-1 min-w-0">
+                                <p class="font-medium truncate">Urban Echoes</p>
+                                <p class="text-sm text-slate-400 truncate">Metro Sound • Album</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 cursor-pointer">
+                            <img src="https://picsum.photos/seed/s4/48/48" class="w-12 h-12 rounded">
+                            <div class="flex-1 min-w-0">
+                                <p class="font-medium truncate">Sunset Waves</p>
+                                <p class="text-sm text-slate-400 truncate">Coastal Rhythm • Album</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Detail View -->
+                <div class="w-1/2 bg-gradient-to-b from-blue-950/50 to-slate-900 overflow-auto">
+                    <div class="p-8">
+                        <div class="flex gap-6 mb-8">
+                            <img src="https://picsum.photos/seed/s1/200/200" class="w-48 h-48 rounded-xl shadow-2xl">
+                            <div class="flex flex-col justify-end">
+                                <p class="text-sm text-slate-400 mb-2">Album</p>
+                                <h1 class="text-3xl font-bold mb-2">Midnight Dreams</h1>
+                                <p class="text-slate-400 mb-4">Aurora Beats • 2024 • 12 tracks</p>
+                                <div class="flex gap-3">
+                                    <button class="px-6 py-2.5 bg-blue-500 rounded-full font-medium flex items-center gap-2 hover:bg-blue-400 transition">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        Play
+                                    </button>
+                                    <button class="p-2.5 rounded-full border border-slate-600 text-slate-400 hover:text-white hover:border-white transition">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Track List -->
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-4 px-4 py-3 rounded-lg bg-blue-500/10 group">
+                                <svg class="w-4 h-4 text-blue-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                                <div class="flex-1">
+                                    <p class="font-medium text-blue-400">Neon Nights</p>
+                                </div>
+                                <span class="text-sm text-slate-400">3:24</span>
+                            </div>
+                            <div class="flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-slate-800/50 cursor-pointer group">
+                                <span class="w-4 text-center text-slate-500 text-sm group-hover:hidden">2</span>
+                                <svg class="w-4 h-4 hidden group-hover:block" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <div class="flex-1">
+                                    <p class="font-medium">Electric Dreams</p>
+                                </div>
+                                <span class="text-sm text-slate-400">4:12</span>
+                            </div>
+                            <div class="flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-slate-800/50 cursor-pointer group">
+                                <span class="w-4 text-center text-slate-500 text-sm group-hover:hidden">3</span>
+                                <svg class="w-4 h-4 hidden group-hover:block" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <div class="flex-1">
+                                    <p class="font-medium">Cosmic Journey</p>
+                                </div>
+                                <span class="text-sm text-slate-400">5:01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player -->
+            <div class="fixed bottom-0 left-0 right-0 h-[72px] bg-slate-900 border-t border-slate-800 flex items-center px-4">
+                <div class="flex items-center gap-4 w-1/4">
+                    <img src="https://picsum.photos/seed/s1/56/56" class="w-14 h-14 rounded-lg">
+                    <div class="min-w-0">
+                        <p class="font-medium truncate">Neon Nights</p>
+                        <p class="text-sm text-slate-400 truncate">Aurora Beats</p>
+                    </div>
+                </div>
+                <div class="flex-1 flex flex-col items-center gap-2 max-w-xl mx-auto">
+                    <div class="flex items-center gap-6">
+                        <button class="text-slate-400 hover:text-white"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+                        <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:scale-105 transition">
+                            <svg class="w-5 h-5 text-slate-900" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                        <button class="text-slate-400 hover:text-white"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+                    </div>
+                    <div class="w-full flex items-center gap-3">
+                        <span class="text-xs text-slate-400">1:23</span>
+                        <div class="flex-1 h-1 bg-slate-700 rounded-full"><div class="w-1/3 h-full bg-blue-500 rounded-full"></div></div>
+                        <span class="text-xs text-slate-400">3:24</span>
+                    </div>
+                </div>
+                <div class="w-1/4"></div>
+            </div>
+
+            <div class="fixed bottom-20 right-6 bg-slate-800 p-4 rounded-xl shadow-xl max-w-xs">
+                <h3 class="font-semibold text-blue-400 mb-2">Direction 6: Split View</h3>
+                <ul class="text-sm text-slate-300 space-y-1">
+                    <li>• Master-detail layout</li>
+                    <li>• List on left, details on right</li>
+                    <li>• Quick navigation + full info</li>
+                    <li>• Efficient for browsing</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showMockup(num) {
+            // Hide all mockups
+            document.querySelectorAll('.mockup').forEach(m => m.classList.remove('active'));
+            // Show selected
+            document.getElementById('mockup-' + num).classList.add('active');
+            // Update buttons
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + num).classList.add('active');
+        }
+    </script>
+</body>
+</html>
