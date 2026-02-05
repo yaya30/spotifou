@@ -81,7 +81,8 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 ### Starter Options Considered
 
 **Frontend:**
-- Official Vite + Shadcn/ui init (selected)
+- React Router v7 Framework + Shadcn/ui (selected)
+- Official Vite + React template (rejected - React Router Framework provides better structure)
 - Pre-configured GitHub templates (rejected - prefer learning standard setup)
 
 **Backend:**
@@ -90,11 +91,11 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 
 ### Selected Starters
 
-#### Frontend: Vite + React + Shadcn/ui
+#### Frontend: React Router v7 Framework + Shadcn/ui
 
 **Initialization Commands:**
 ```bash
-npm create vite@latest frontend -- --template react-ts
+npx create-react-router@latest frontend
 cd frontend
 npm install
 npx shadcn@latest init
@@ -104,11 +105,15 @@ npx shadcn@latest init
 - Style: Default
 - Base color: Slate
 - CSS variables: Yes
+- Components path: `app/components/ui`
+- Utils path: `app/lib/utils`
 
 **Additional Dependencies:**
 ```bash
-npm install @tanstack/react-query zustand framer-motion lucide-react react-router-dom
+npm install @tanstack/react-query zustand framer-motion lucide-react
 ```
+
+**Note:** React Router v7 Framework mode uses file-based routing in `app/routes/` and provides SSR capabilities. This is the modern recommended approach for React applications with routing.
 
 #### Backend: Spring Initializr
 
@@ -134,15 +139,16 @@ Dependencies:
 
 ### Architectural Decisions Provided by Starters
 
-**Frontend (Vite + React):**
+**Frontend (React Router v7 Framework):**
 
 | Decision | Value |
 |----------|-------|
 | Language | TypeScript (strict mode) |
-| Build Tool | Vite 7 with SWC |
+| Build Tool | Vite 7 via React Router |
+| Routing | File-based routing (`app/routes/`) |
 | Styling | Tailwind CSS 4 + CSS Variables |
 | Components | Shadcn/ui (copy-paste, customizable) |
-| Path Aliases | `@/` → `src/` |
+| Path Aliases | `~/` → `app/` |
 
 **Backend (Spring Boot):**
 
@@ -159,13 +165,19 @@ Dependencies:
 ```
 spotifou/
 ├── frontend/
-│   ├── src/
+│   ├── app/
 │   │   ├── components/
-│   │   ├── pages/
+│   │   │   ├── ui/            # Shadcn components
+│   │   │   └── common/        # App-wide components
+│   │   ├── features/          # Feature modules
+│   │   ├── routes/            # File-based routing
 │   │   ├── hooks/
 │   │   ├── stores/
 │   │   ├── services/
-│   │   └── lib/
+│   │   ├── lib/
+│   │   ├── types/
+│   │   ├── root.tsx           # App root layout
+│   │   └── routes.ts          # Route configuration
 │   ├── package.json
 │   └── vite.config.ts
 ├── backend/
@@ -235,11 +247,12 @@ spotifou/
 
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
-| **Routing** | React Router v7 | Mature, well-documented |
+| **Framework** | React Router v7 Framework | File-based routing, SSR-ready, modern approach |
+| **Routing** | File-based (`app/routes/`) | Convention over configuration |
 | **Server State** | TanStack Query | Caching, loading states, mutations |
 | **UI State** | Zustand | Simple, minimal boilerplate |
 | **Forms** | React Hook Form + Zod | Performant, type-safe validation |
-| **Error Boundaries** | react-error-boundary | As needed, proven library |
+| **Error Boundaries** | Built-in (React Router) | ErrorBoundary in root.tsx |
 
 ### Infrastructure & Deployment
 
@@ -293,10 +306,10 @@ spotifou/
 
 ### Structure Patterns
 
-**Frontend (Feature-based):**
+**Frontend (Feature-based with React Router Framework):**
 
 ```
-frontend/src/
+frontend/app/
 ├── components/ui/          # Shadcn components
 ├── components/common/      # App-wide (PlayerBar, Sidebar)
 ├── features/
@@ -306,11 +319,14 @@ frontend/src/
 │   ├── library/
 │   ├── search/
 │   └── player/
+├── routes/                 # File-based routing
 ├── hooks/                  # Shared hooks
 ├── stores/                 # Zustand stores
 ├── services/               # API functions
 ├── lib/                    # Utilities
-└── types/                  # TypeScript types
+├── types/                  # TypeScript types
+├── root.tsx                # App root layout
+└── routes.ts               # Route configuration
 ```
 
 **Backend (Layer-based):**
@@ -392,26 +408,28 @@ spotifou/
 │   ├── package-lock.json
 │   ├── vite.config.ts
 │   ├── tsconfig.json
-│   ├── tsconfig.node.json
-│   ├── tailwind.config.js
-│   ├── postcss.config.js
+│   ├── react-router.config.ts        # React Router configuration
 │   ├── components.json               # Shadcn configuration
-│   ├── index.html
 │   ├── .env                          # VITE_API_URL, VITE_GOOGLE_CLIENT_ID
 │   ├── .env.example
-│   ├── .eslintrc.cjs
-│   ├── .prettierrc
+│   ├── .gitignore
 │   │
 │   ├── public/
-│   │   ├── favicon.ico
-│   │   └── assets/
-│   │       └── images/
+│   │   └── favicon.ico
 │   │
-│   ├── src/
-│   │   ├── main.tsx                  # App entry point
-│   │   ├── App.tsx                   # Root component with providers
-│   │   ├── index.css                 # Global styles + Tailwind
-│   │   ├── vite-env.d.ts
+│   ├── app/                          # React Router Framework app folder
+│   │   ├── root.tsx                  # App root layout with providers
+│   │   ├── routes.ts                 # Route configuration
+│   │   ├── app.css                   # Global styles + Tailwind
+│   │   │
+│   │   ├── routes/                   # File-based routing
+│   │   │   ├── _index.tsx            # Home page (/)
+│   │   │   ├── login.tsx             # Login page (/login)
+│   │   │   ├── artist.$id.tsx        # Artist page (/artist/:id)
+│   │   │   ├── album.$id.tsx         # Album page (/album/:id)
+│   │   │   ├── playlist.$id.tsx      # Playlist page (/playlist/:id)
+│   │   │   ├── library.tsx           # Library page (/library)
+│   │   │   └── search.tsx            # Search page (/search)
 │   │   │
 │   │   ├── components/
 │   │   │   ├── ui/                   # Shadcn components
@@ -420,109 +438,28 @@ spotifou/
 │   │   │   │   ├── card.tsx
 │   │   │   │   ├── dialog.tsx
 │   │   │   │   ├── dropdown-menu.tsx
-│   │   │   │   ├── scroll-area.tsx
 │   │   │   │   ├── slider.tsx
 │   │   │   │   ├── skeleton.tsx
-│   │   │   │   ├── toast.tsx
-│   │   │   │   ├── toaster.tsx
-│   │   │   │   └── tooltip.tsx
+│   │   │   │   └── toast.tsx
 │   │   │   │
 │   │   │   └── common/               # App-wide shared components
 │   │   │       ├── Layout.tsx        # Main app layout
 │   │   │       ├── Sidebar.tsx       # Navigation sidebar
 │   │   │       ├── PlayerBar.tsx     # Persistent bottom player
 │   │   │       ├── Header.tsx        # Top header with search
-│   │   │       ├── EmptyState.tsx    # Reusable empty state
-│   │   │       ├── ErrorFallback.tsx # Error boundary fallback
-│   │   │       └── ProtectedRoute.tsx
+│   │   │       └── EmptyState.tsx    # Reusable empty state
 │   │   │
 │   │   ├── features/
 │   │   │   ├── auth/
 │   │   │   │   ├── components/
-│   │   │   │   │   ├── GoogleLoginButton.tsx
-│   │   │   │   │   └── AuthGuard.tsx
 │   │   │   │   ├── hooks/
-│   │   │   │   │   └── useAuth.ts
 │   │   │   │   ├── services/
-│   │   │   │   │   └── authApi.ts
 │   │   │   │   └── types/
-│   │   │   │       └── auth.types.ts
-│   │   │   │
 │   │   │   ├── catalog/
-│   │   │   │   ├── components/
-│   │   │   │   │   ├── ArtistCard.tsx
-│   │   │   │   │   ├── ArtistGrid.tsx
-│   │   │   │   │   ├── AlbumCard.tsx
-│   │   │   │   │   ├── AlbumGrid.tsx
-│   │   │   │   │   ├── TrackRow.tsx
-│   │   │   │   │   └── TrackList.tsx
-│   │   │   │   ├── hooks/
-│   │   │   │   │   ├── useArtists.ts
-│   │   │   │   │   ├── useAlbums.ts
-│   │   │   │   │   └── useTracks.ts
-│   │   │   │   ├── services/
-│   │   │   │   │   └── catalogApi.ts
-│   │   │   │   └── types/
-│   │   │   │       └── catalog.types.ts
-│   │   │   │
 │   │   │   ├── player/
-│   │   │   │   ├── components/
-│   │   │   │   │   ├── PlayButton.tsx
-│   │   │   │   │   ├── ProgressBar.tsx
-│   │   │   │   │   ├── VolumeControl.tsx
-│   │   │   │   │   └── NowPlaying.tsx
-│   │   │   │   ├── hooks/
-│   │   │   │   │   └── usePlayer.ts
-│   │   │   │   └── types/
-│   │   │   │       └── player.types.ts
-│   │   │   │
 │   │   │   ├── playlists/
-│   │   │   │   ├── components/
-│   │   │   │   │   ├── PlaylistCard.tsx
-│   │   │   │   │   ├── PlaylistGrid.tsx
-│   │   │   │   │   ├── PlaylistDetail.tsx
-│   │   │   │   │   ├── CreatePlaylistDialog.tsx
-│   │   │   │   │   └── AddToPlaylistMenu.tsx
-│   │   │   │   ├── hooks/
-│   │   │   │   │   ├── usePlaylists.ts
-│   │   │   │   │   └── usePlaylistMutations.ts
-│   │   │   │   ├── services/
-│   │   │   │   │   └── playlistApi.ts
-│   │   │   │   └── types/
-│   │   │   │       └── playlist.types.ts
-│   │   │   │
 │   │   │   ├── library/
-│   │   │   │   ├── components/
-│   │   │   │   │   ├── FavoriteButton.tsx
-│   │   │   │   │   └── FavoritesList.tsx
-│   │   │   │   ├── hooks/
-│   │   │   │   │   └── useFavorites.ts
-│   │   │   │   ├── services/
-│   │   │   │   │   └── libraryApi.ts
-│   │   │   │   └── types/
-│   │   │   │       └── library.types.ts
-│   │   │   │
 │   │   │   └── search/
-│   │   │       ├── components/
-│   │   │       │   ├── SearchInput.tsx
-│   │   │       │   ├── SearchResults.tsx
-│   │   │       │   └── SearchResultItem.tsx
-│   │   │       ├── hooks/
-│   │   │       │   └── useSearch.ts
-│   │   │       ├── services/
-│   │   │       │   └── searchApi.ts
-│   │   │       └── types/
-│   │   │           └── search.types.ts
-│   │   │
-│   │   ├── pages/
-│   │   │   ├── HomePage.tsx
-│   │   │   ├── LoginPage.tsx
-│   │   │   ├── ArtistPage.tsx
-│   │   │   ├── AlbumPage.tsx
-│   │   │   ├── PlaylistPage.tsx
-│   │   │   ├── LibraryPage.tsx
-│   │   │   ├── SearchPage.tsx
-│   │   │   └── NotFoundPage.tsx
 │   │   │
 │   │   ├── hooks/                    # Shared hooks
 │   │   │   └── useDebounce.ts
@@ -532,19 +469,16 @@ spotifou/
 │   │   │   └── uiStore.ts            # UI state (sidebar, modals)
 │   │   │
 │   │   ├── services/                 # Shared API utilities
-│   │   │   ├── apiClient.ts          # Axios instance with interceptors
+│   │   │   ├── apiClient.ts          # Fetch/Axios with interceptors
 │   │   │   └── queryClient.ts        # TanStack Query client config
 │   │   │
 │   │   ├── lib/                      # Utilities
 │   │   │   ├── utils.ts              # cn() and helpers
 │   │   │   └── formatDuration.ts
 │   │   │
-│   │   ├── types/                    # Shared TypeScript types
-│   │   │   ├── api.types.ts          # API response wrappers
-│   │   │   └── index.ts
-│   │   │
-│   │   └── router/
-│   │       └── index.tsx             # React Router configuration
+│   │   └── types/                    # Shared TypeScript types
+│   │       ├── api.types.ts          # API response wrappers
+│   │       └── index.ts
 │   │
 │   └── tests/
 │       ├── setup.ts

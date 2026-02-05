@@ -22,12 +22,12 @@ _This file contains critical rules and patterns that AI agents must follow when 
 | Node.js | 24.0.13 | Required runtime |
 | React | 18+ | With strict mode |
 | Vite | 7 | Build tool with SWC |
-| TypeScript | strict | Path alias: `@/` → `src/` |
+| TypeScript | strict | Path alias: `~/` → `app/` |
 | TanStack Query | latest | Server state management |
 | Zustand | latest | UI state only |
 | Tailwind CSS | 4 | With CSS variables |
 | Shadcn/ui | latest | Copy-paste components |
-| React Router | v7 | Client-side routing |
+| React Router | v7 Framework | File-based routing (`app/routes/`) |
 | React Hook Form | latest | With Zod validation |
 | Framer Motion | latest | Animations |
 | @react-oauth/google | latest | OAuth client |
@@ -52,10 +52,10 @@ _This file contains critical rules and patterns that AI agents must follow when 
 
 **TypeScript (Frontend):**
 - **Strict mode enabled** - never use `any` type, always define interfaces
-- **Path alias** - use `@/` for all imports from `src/` (e.g., `@/components/ui/button`)
+- **Path alias** - use `~/` for all imports from `app/` (e.g., `~/components/ui/button`)
 - **File extensions** - use `.tsx` for components, `.ts` for utilities/hooks/types
 - **Named exports** - prefer named exports over default exports (except pages)
-- **Type definitions** - co-locate types in feature `types/` folders, shared types in `src/types/`
+- **Type definitions** - co-locate types in feature `types/` folders, shared types in `app/types/`
 
 **Java (Backend):**
 - **Lombok required** - use `@Data`, `@Builder`, `@RequiredArgsConstructor` to reduce boilerplate
@@ -75,9 +75,10 @@ _This file contains critical rules and patterns that AI agents must follow when 
   - Never mix server state in Zustand stores
   - Use selectors to prevent unnecessary re-renders
 - **Component organization:**
-  - Feature components in `features/{name}/components/`
-  - Shared UI in `components/common/`
-  - Shadcn primitives in `components/ui/`
+  - Feature components in `app/features/{name}/components/`
+  - Shared UI in `app/components/common/`
+  - Shadcn primitives in `app/components/ui/`
+  - Routes in `app/routes/` (file-based routing)
 - **React Hook Form + Zod** - all forms must use this combination
   - Define Zod schema first, infer TypeScript types from it
 - **Error boundaries** - wrap feature sections, not individual components
