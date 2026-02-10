@@ -42,7 +42,7 @@ development_status:
   epic-1: in-progress
   1-1-initialize-monorepo-structure: done
   1-2-initialize-frontend-project: done
-  1-3-initialize-backend-project: backlog
+  1-3-initialize-backend-project: done
   1-4-configure-cors-and-api-base-path: backlog
   epic-1-retrospective: optional
 

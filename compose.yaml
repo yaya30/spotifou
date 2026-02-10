@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: spotifou
       POSTGRES_DB: spotifou
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql
       - ./backend/data_seed.sql:/docker-entrypoint-initdb.d/data_seed.sql
   adminer:
     image: adminer
