@@ -1,6 +1,6 @@
 # Story 2.1 : Créer l'entité User et le Repository
 
-Status: ready-for-dev
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -12,7 +12,7 @@ afin que **les données utilisateur puissent être persistées après la connexi
 
 ## Acceptance Criteria
 
-1. Une migration Flyway `V1__create_users_table.sql` crée la table `users` avec : `id` (BIGSERIAL PK), `email` (VARCHAR UNIQUE NOT NULL), `name` (VARCHAR), `picture_url` (VARCHAR), `created_at` (TIMESTAMP), `updated_at` (TIMESTAMP)
+1. Une migration Flyway `V1__create_users_table.sql` crée la table `users` avec : `id` (BIGSERIAL PK), `email` (VARCHAR UNIQUE NOT NULL), `name` (VARCHAR NOT NULL), `picture_url` (VARCHAR), `created_at` (TIMESTAMP), `updated_at` (TIMESTAMP)
 2. `User.java` est une entité JPA mappée sur la table `users` avec les annotations Lombok
 3. `UserRepository.java` étend `JpaRepository<User, Long>` et expose `Optional<User> findByEmail(String email)`
 
@@ -73,7 +73,7 @@ afin que **les données utilisateur puissent être persistées après la connexi
 CREATE TABLE users (
     id          BIGSERIAL    PRIMARY KEY,
     email       VARCHAR      NOT NULL UNIQUE,
-    name        VARCHAR,
+    name        VARCHAR      NOT NULL,
     picture_url VARCHAR,
     created_at  TIMESTAMP,
     updated_at  TIMESTAMP
@@ -105,6 +105,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String name;
 
     @Column(name = "picture_url")
@@ -219,3 +220,8 @@ claude-sonnet-4-6
 ### Completion Notes List
 
 ### File List
+
+- `backend/src/main/resources/db/migration/V1__create_users_table.sql`
+- `backend/src/main/java/com/ayaco/spotifou/model/User.java`
+- `backend/src/main/java/com/ayaco/spotifou/repository/UserRepository.java`
+- `backend/src/test/java/com/ayaco/spotifou/repository/UserRepositoryTest.java`

@@ -48,7 +48,7 @@ development_status:
 
   # Epic 2: User Authentication
   epic-2: in-progress
-  2-1-create-user-entity-and-repository: ready-for-dev
+  2-1-create-user-entity-and-repository: done
   2-2-implement-google-oauth-backend-authentication: backlog
   2-3-implement-frontend-google-oauth-login: backlog
   2-4-implement-session-persistence-and-protected-routes: backlog
